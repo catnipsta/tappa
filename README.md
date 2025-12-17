@@ -20,9 +20,9 @@ taprec (levelfilename.tap) (level speed) (path/to/song.{mp3,wav,ogg,flac})
 (level speeds are reccommended to be somewhere from 10 to 64)
 
 ## Extra features
-Q quits the level.
+Q to quit.
 </br>
-Space bar pauses the level.
+Space bar to pause.
 </br>
 When playing a level, R restarts.
 </br>
