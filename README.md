@@ -1,5 +1,5 @@
 # tappa
-Simple rhythm game for the UNIX terminal.
+Scrolling rhythm game for the UNIX terminal.
 
 ## Install
 ```
