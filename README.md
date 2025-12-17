@@ -1,7 +1,7 @@
 # tappa
 Simple rhythm game for the UNIX terminal.
 
-## install
+## Install
 ```
 git clone https://github.com/catnipsta/tappa.git && cd tappa
 make
