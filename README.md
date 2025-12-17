@@ -17,7 +17,7 @@ tappa level.tap
 ```
 taprec (levelfilename.tap) (level speed) (path/to/song.{mp3,wav,ogg,flac})
 ```
-(level speeds are reccommended to be from 10 to 64)
+(level speeds are reccommended to be somewhere from 10 to 64)
 
 ## Extra features
 Q quits the level.
