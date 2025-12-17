@@ -21,5 +21,7 @@ taprec (levelfilename.tap) (level speed) (path/to/song.{mp3,wav,ogg,flac})
 
 ## Extra features
 Q quits the level.
+</br>
 Space bar pauses the level.
+</br>
 When recording a level, you can use the / key to seek to a specific time stamp of the level.
