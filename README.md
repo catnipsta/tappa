@@ -1,2 +1,25 @@
 # tappa
 Simple rhythm game for the UNIX terminal.
+
+## install
+```
+git clone https://github.com/catnipsta/tappa.git && cd tappa
+make
+sudo make install
+```
+
+## Play a level
+```
+tappa level.tap
+```
+
+## Create a level
+```
+taprec (levelfilename.tap) (level speed) (path/to/song.{mp3,wav,ogg,flac})
+```
+(level speeds are reccommended to be from 10 to 64)
+
+## Extra features
+Q quits the level.
+Space bar pauses the level.
+When recording a level, you can use the / key to seek to a specific time stamp of the level.
