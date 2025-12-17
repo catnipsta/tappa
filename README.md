@@ -24,4 +24,6 @@ Q quits the level.
 </br>
 Space bar pauses the level.
 </br>
-When recording a level, you can use the / key to seek to a specific time stamp of the level.
+When playing a level, R restarts.
+</br>
+When recording a level, the / key allows you to seek to a specific time stamp of the level.
