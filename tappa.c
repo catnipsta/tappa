@@ -27,19 +27,19 @@ void draw(void){
 	}
 	mvprintw(0,0,"time: %d/%d",t,length);
 	mvprintw(1,0,"score: %d",score);
-	mvprintw(0,mx/2-5,"d  f  j  k");
-	mvprintw(1,mx/2-5,"_  _  _  _");
+	mvprintw(my-1,mx/2-5,"d  f  j  k");
+	mvprintw(my-2,mx/2-5,"_  _  _  _");
 	for(int i = 0; i < 1024; i++){
-		if(dnt[i]-t < my-1 && dnt[i]-t >= 1) mvprintw(dnt[i]-t+1,mx/2-5,"o");
-		if(fnt[i]-t < my-1 && fnt[i]-t >= 1) mvprintw(fnt[i]-t+1,mx/2-2,"o");
-		if(jnt[i]-t < my-1 && jnt[i]-t >= 1) mvprintw(jnt[i]-t+1,mx/2+1,"o");
-		if(knt[i]-t < my-1 && knt[i]-t >= 1) mvprintw(knt[i]-t+1,mx/2+4,"o");
+		if(dnt[i]-t < my-1 && dnt[i]-t >= 1) mvprintw(my-(dnt[i]-t)-2,mx/2-5,"o");
+		if(fnt[i]-t < my-1 && fnt[i]-t >= 1) mvprintw(my-(fnt[i]-t)-2,mx/2-2,"o");
+		if(jnt[i]-t < my-1 && jnt[i]-t >= 1) mvprintw(my-(jnt[i]-t)-2,mx/2+1,"o");
+		if(knt[i]-t < my-1 && knt[i]-t >= 1) mvprintw(my-(knt[i]-t)-2,mx/2+4,"o");
 		if(dnt[i] == 0 && fnt[i] == 0 && jnt[i] == 0 && knt[i] == 0) break;
 	}
-	if(d == true) mvprintw(1,mx/2-5,"*");
-	if(f == true) mvprintw(1,mx/2-2,"*");
-	if(j == true) mvprintw(1,mx/2+1,"*");
-	if(k == true) mvprintw(1,mx/2+4,"*");
+	if(d == true) mvprintw(my-2,mx/2-5,"*");
+	if(f == true) mvprintw(my-2,mx/2-2,"*");
+	if(j == true) mvprintw(my-2,mx/2+1,"*");
+	if(k == true) mvprintw(my-2,mx/2+4,"*");
 	refresh();
 }
 

@@ -24,12 +24,12 @@ void draw(void){
 		}
 	}
 	mvprintw(0,0,"time: %d/%d",t,length);
-	mvprintw(0,mx/2-5,"d  f  j  k");
-	mvprintw(1,mx/2-5,"_  _  _  _");
-	if(d == true) mvprintw(1,mx/2-5,"*");
-	if(f == true) mvprintw(1,mx/2-2,"*");
-	if(j == true) mvprintw(1,mx/2+1,"*");
-	if(k == true) mvprintw(1,mx/2+4,"*");
+	mvprintw(my-1,mx/2-5,"d  f  j  k");
+	mvprintw(my-2,mx/2-5,"_  _  _  _");
+	if(d == true) mvprintw(my-2,mx/2-5,"*");
+	if(f == true) mvprintw(my-2,mx/2-2,"*");
+	if(j == true) mvprintw(my-2,mx/2+1,"*");
+	if(k == true) mvprintw(my-2,mx/2+4,"*");
 	refresh();
 }
 
