@@ -7,7 +7,7 @@
 #define MINIAUDIO_IMPLEMENTATION
 #include "miniaudio.h"
 
-int t, length, score, speed, ntl;
+int t, length, hits, misses, bar, speed, ntl;
 bool d,f,j,k,quit,paused;
 int dnt[1024],fnt[1024],jnt[1024],knt[1024];
 char song[64];
@@ -25,8 +25,9 @@ void draw(void){
 			mvprintw(y,x," ");
 		}
 	}
-	mvprintw(0,0,"time: %d/%d",t,length);
-	mvprintw(1,0,"score: %d",score);
+	mvprintw(0,0,"time:   %d/%d",t,length);
+	mvprintw(1,0,"hits:   %d",hits);
+	mvprintw(2,0,"misses: %d",misses);
 	mvprintw(my-1,mx/2-5,"d  f  j  k");
 	mvprintw(my-2,mx/2-5,"_  _  _  _");
 	for(int i = 0; i < 1024; i++){
@@ -40,6 +41,11 @@ void draw(void){
 	if(f == true) mvprintw(my-2,mx/2-2,"*");
 	if(j == true) mvprintw(my-2,mx/2+1,"*");
 	if(k == true) mvprintw(my-2,mx/2+4,"*");
+	int bl = (float)my/100*bar;
+	for(int y = 0; y < bl; y++){
+		mvprintw((my-y)-1,mx/2-8,"|");
+		mvprintw(y,mx/2+7,"|");
+	}
 	refresh();
 }
 
@@ -75,7 +81,7 @@ void input(void){
 			if(paused) togglepause();
 			break;
 		case 'r':
-			score = -69420;
+			bar = 0;
 			break;
 		case ' ':
 			togglepause();
@@ -90,31 +96,51 @@ void scorekeep(void){
 		if(jnt[i]-t >= -ntl && jnt[i]-t <= ntl) ej = true;
 		if(knt[i]-t >= -ntl && knt[i]-t <= ntl) ek = true;
 		if(dnt[i]-t >= -ntl && dnt[i]-t <= ntl && dnt[i] != 0 && d == true){
-			score++;
+			hits++;
+			bar += 2;
+			if(bar > 100) bar=100;
 			dnt[i] = -99;
 		}
-		else if(dnt[i]-t == -(ntl+1) && dnt[i] != 0) score--;
+		else if(dnt[i]-t == -(ntl+1) && dnt[i] != 0){
+			misses++;
+			bar -= 8;
+		}
 		if(fnt[i]-t >= -ntl && fnt[i]-t <= ntl && fnt[i] != 0 && f == true){
-			score++;
+			hits++;
+			bar += 2;
+			if(bar > 100) bar=100;
 			fnt[i] = -99;
 		}
-		else if(fnt[i]-t == -(ntl+1) && fnt[i] != 0) score--;
+		else if(fnt[i]-t == -(ntl+1) && fnt[i] != 0){
+			misses++;
+			bar -= 8;
+		}
 		if(jnt[i]-t >= -ntl && jnt[i]-t <= ntl && jnt[i] != 0 && j == true){
-			score++;
+			hits++;
+			bar += 2;
+			if(bar > 100) bar=100;
 			jnt[i] = -99;
 		}
-		else if(jnt[i]-t == -(ntl+1) && jnt[i] != 0) score--;
+		else if(jnt[i]-t == -(ntl+1) && jnt[i] != 0){
+			misses++;
+			bar -= 8;
+		}
 		if(knt[i]-t >= -ntl && knt[i]-t <= ntl && knt[i] != 0 && k == true){
-			score++;
+			hits++;
+			bar += 2;
+			if(bar > 100) bar=100;
 			knt[i] = -99;
 		}
-		else if(knt[i]-t == -(ntl+1) && knt[i] != 0) score--;
+		else if(knt[i]-t == -(ntl+1) && knt[i] != 0){
+			misses++;
+			bar -= 8;
+		}
 		if(dnt[i] == 0 && fnt[i] == 0 && jnt[i] == 0 && knt[i] == 0) break;
 	}
-	if(d == true && ed == false) score--;
-	if(f == true && ef == false) score--;
-	if(j == true && ej == false) score--;
-	if(k == true && ek == false) score--;
+	if((d == true && ed == false) || (f == true && ef == false) || (j == true && ej == false) || (k == true && ek == false)){
+		misses++;
+		bar -= 8;
+	}
 }
 
 int load(char *lvlname){
@@ -211,13 +237,15 @@ int main(int argc, char *argv[]){
 			return 1;
 		}
 		t=0;
-		score=0;
+		hits=0;
+		misses=0;
+		bar=100;
 		d=false;
 		f=false;
 		j=false;
 		k=false;
 	        ma_decoder_seek_to_pcm_frame(&decoder, 0);
-		while(score >= -13 && t < length && !quit){
+		while(bar > 0 && t < length && !quit){
                 	ma_decoder_get_cursor_in_pcm_frames(&decoder, &frame);
 			t++;
 			draw();
@@ -235,6 +263,6 @@ int main(int argc, char *argv[]){
 	endwin();
 	ma_device_uninit(&device);
 	ma_decoder_uninit(&decoder);
-	printf("song: %s\ntime: %d/%d\nscore: %d\n",song,t,length,score);
+	printf("song:   %s\ntime:   %d/%d\nhits:   %d\nmisses: %d\n",song,t,length,hits,misses);
 	return 0;
 }
