@@ -103,7 +103,7 @@ void scorekeep(void){
 		}
 		else if(dnt[i]-t == -(ntl+1) && dnt[i] != 0){
 			misses++;
-			bar -= 8;
+			bar -= 7;
 		}
 		if(fnt[i]-t >= -ntl && fnt[i]-t <= ntl && fnt[i] != 0 && f == true){
 			hits++;
@@ -113,7 +113,7 @@ void scorekeep(void){
 		}
 		else if(fnt[i]-t == -(ntl+1) && fnt[i] != 0){
 			misses++;
-			bar -= 8;
+			bar -= 7;
 		}
 		if(jnt[i]-t >= -ntl && jnt[i]-t <= ntl && jnt[i] != 0 && j == true){
 			hits++;
@@ -123,7 +123,7 @@ void scorekeep(void){
 		}
 		else if(jnt[i]-t == -(ntl+1) && jnt[i] != 0){
 			misses++;
-			bar -= 8;
+			bar -= 7;
 		}
 		if(knt[i]-t >= -ntl && knt[i]-t <= ntl && knt[i] != 0 && k == true){
 			hits++;
@@ -133,13 +133,17 @@ void scorekeep(void){
 		}
 		else if(knt[i]-t == -(ntl+1) && knt[i] != 0){
 			misses++;
-			bar -= 8;
+			bar -= 7;
 		}
 		if(dnt[i] == 0 && fnt[i] == 0 && jnt[i] == 0 && knt[i] == 0) break;
 	}
-	if((d == true && ed == false) || (f == true && ef == false) || (j == true && ej == false) || (k == true && ek == false)){
+	/*if((d == true && ed == false) || (f == true && ef == false) || (j == true && ej == false) || (k == true && ek == false)){
 		misses++;
-		bar -= 8;
+		bar -= 7;
+	}*/
+	if((d == true || f == true || j == true || k == true) && (ed == false && ef == false && ej == false && ek == false)){
+		misses++;
+		bar -= 7;
 	}
 }
 
