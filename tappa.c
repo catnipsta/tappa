@@ -142,10 +142,8 @@ void scorekeep(void){
 		}
 		if(dnt[i] == 0 && fnt[i] == 0 && jnt[i] == 0 && knt[i] == 0) break;
 	}
-	if((d == true && ed == false) || (f == true && ef == false) || (j == true && ej == false) || (k == true && ek == false)){
-		misses++;
+	if((d == true && ed == false) || (f == true && ef == false) || (j == true && ej == false) || (k == true && ek == false))
 		bar -= 7;
-	}
 }
 
 int load(char *lvlname){
