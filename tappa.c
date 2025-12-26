@@ -25,9 +25,10 @@ void draw(void){
 			mvprintw(y,x," ");
 		}
 	}
-	mvprintw(0,0,"time:   %d/%d",t,length);
-	mvprintw(1,0,"hits:   %d",hits);
-	mvprintw(2,0,"misses: %d",misses);
+	mvprintw(0,0,"time:     %d/%d",t,length);
+	mvprintw(1,0,"hits:     %d",hits);
+	mvprintw(2,0,"misses:   %d",misses);
+	mvprintw(3,0,"accuracy: %f\%\n",(float)hits/(hits+misses)*100);
 	mvprintw(my-1,mx/2-5,"d  f  j  k");
 	mvprintw(my-2,mx/2-5,"_  _  _  _");
 	for(int i = 0; i < 1024; i++){
@@ -89,47 +90,51 @@ void input(void){
 	}
 }
 void scorekeep(void){
-	bool ed=false,ef=false,ej=false,ek=false;
+	bool ed=false,ef=false,ej=false,ek=false,hitd=false,hitf=false,hitj=false,hitk=false;
 	for(int i = 0; i < 1024; i++){
 		if(dnt[i]-t >= -ntl && dnt[i]-t <= ntl) ed = true;
 		if(fnt[i]-t >= -ntl && fnt[i]-t <= ntl) ef = true;
 		if(jnt[i]-t >= -ntl && jnt[i]-t <= ntl) ej = true;
 		if(knt[i]-t >= -ntl && knt[i]-t <= ntl) ek = true;
-		if(dnt[i]-t >= -ntl && dnt[i]-t <= ntl && dnt[i] != 0 && d == true){
+		if(dnt[i]-t >= -ntl && dnt[i]-t <= ntl && dnt[i] != 0 && d == true && hitd == false){
 			hits++;
 			bar += 2;
 			if(bar > 100) bar=100;
 			dnt[i] = -99;
+			hitd=true;
 		}
 		else if(dnt[i]-t == -(ntl+1) && dnt[i] != 0){
 			misses++;
 			bar -= 7;
 		}
-		if(fnt[i]-t >= -ntl && fnt[i]-t <= ntl && fnt[i] != 0 && f == true){
+		if(fnt[i]-t >= -ntl && fnt[i]-t <= ntl && fnt[i] != 0 && f == true && hitf == false){
 			hits++;
 			bar += 2;
 			if(bar > 100) bar=100;
 			fnt[i] = -99;
+			hitf=true;
 		}
 		else if(fnt[i]-t == -(ntl+1) && fnt[i] != 0){
 			misses++;
 			bar -= 7;
 		}
-		if(jnt[i]-t >= -ntl && jnt[i]-t <= ntl && jnt[i] != 0 && j == true){
+		if(jnt[i]-t >= -ntl && jnt[i]-t <= ntl && jnt[i] != 0 && j == true && hitj == false){
 			hits++;
 			bar += 2;
 			if(bar > 100) bar=100;
 			jnt[i] = -99;
+			hitj=true;
 		}
 		else if(jnt[i]-t == -(ntl+1) && jnt[i] != 0){
 			misses++;
 			bar -= 7;
 		}
-		if(knt[i]-t >= -ntl && knt[i]-t <= ntl && knt[i] != 0 && k == true){
+		if(knt[i]-t >= -ntl && knt[i]-t <= ntl && knt[i] != 0 && k == true && hitk == false){
 			hits++;
 			bar += 2;
 			if(bar > 100) bar=100;
 			knt[i] = -99;
+			hitk=true;
 		}
 		else if(knt[i]-t == -(ntl+1) && knt[i] != 0){
 			misses++;
@@ -137,11 +142,7 @@ void scorekeep(void){
 		}
 		if(dnt[i] == 0 && fnt[i] == 0 && jnt[i] == 0 && knt[i] == 0) break;
 	}
-	/*if((d == true && ed == false) || (f == true && ef == false) || (j == true && ej == false) || (k == true && ek == false)){
-		misses++;
-		bar -= 7;
-	}*/
-	if((d == true || f == true || j == true || k == true) && (ed == false && ef == false && ej == false && ek == false)){
+	if((d == true && ed == false) || (f == true && ef == false) || (j == true && ej == false) || (k == true && ek == false)){
 		misses++;
 		bar -= 7;
 	}
@@ -267,6 +268,7 @@ int main(int argc, char *argv[]){
 	endwin();
 	ma_device_uninit(&device);
 	ma_decoder_uninit(&decoder);
-	printf("song:   %s\ntime:   %d/%d\nhits:   %d\nmisses: %d\n",song,t,length,hits,misses);
+	if(t == length)
+		printf("song:     %s\nhits:     %d\nmisses:   %d\naccuracy: %f\%\n",song,hits,misses,(float)hits/(hits+misses)*100);
 	return 0;
 }
