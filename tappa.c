@@ -98,52 +98,52 @@ void scorekeep(void){
 		if(knt[i]-t >= -ntl && knt[i]-t <= ntl) ek = true;
 		if(dnt[i]-t >= -ntl && dnt[i]-t <= ntl && dnt[i] != 0 && d == true && hitd == false){
 			hits++;
-			bar += 2;
+			bar += 1;
 			if(bar > 100) bar=100;
 			dnt[i] = -99;
 			hitd=true;
 		}
 		else if(dnt[i]-t == -(ntl+1) && dnt[i] != 0){
 			misses++;
-			bar -= 7;
+			bar -= 4;
 		}
 		if(fnt[i]-t >= -ntl && fnt[i]-t <= ntl && fnt[i] != 0 && f == true && hitf == false){
 			hits++;
-			bar += 2;
+			bar += 1;
 			if(bar > 100) bar=100;
 			fnt[i] = -99;
 			hitf=true;
 		}
 		else if(fnt[i]-t == -(ntl+1) && fnt[i] != 0){
 			misses++;
-			bar -= 7;
+			bar -= 4;
 		}
 		if(jnt[i]-t >= -ntl && jnt[i]-t <= ntl && jnt[i] != 0 && j == true && hitj == false){
 			hits++;
-			bar += 2;
+			bar += 1;
 			if(bar > 100) bar=100;
 			jnt[i] = -99;
 			hitj=true;
 		}
 		else if(jnt[i]-t == -(ntl+1) && jnt[i] != 0){
 			misses++;
-			bar -= 7;
+			bar -= 4;
 		}
 		if(knt[i]-t >= -ntl && knt[i]-t <= ntl && knt[i] != 0 && k == true && hitk == false){
 			hits++;
-			bar += 2;
+			bar += 1;
 			if(bar > 100) bar=100;
 			knt[i] = -99;
 			hitk=true;
 		}
 		else if(knt[i]-t == -(ntl+1) && knt[i] != 0){
 			misses++;
-			bar -= 7;
+			bar -= 4;
 		}
 		if(dnt[i] == 0 && fnt[i] == 0 && jnt[i] == 0 && knt[i] == 0) break;
 	}
 	if((d == true && ed == false) || (f == true && ef == false) || (j == true && ej == false) || (k == true && ek == false))
-		bar -= 7;
+		bar -= 4;
 }
 
 int load(char *lvlname){
