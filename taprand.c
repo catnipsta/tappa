@@ -43,38 +43,66 @@ int load(char *lvlname){
 	return 0;
 }
 
-void dadd(int note){
+void append(int arr[], int note){
 	for(int i = 0; i < 1024; i++){
-		if(dnt[i] == 0){
-			dnt[i] = note;
+		if(arr[i] == 0){
+			arr[i] = note;
 			break;
 		}
 	}
 }
 
-void fadd(int note){
+void randomize(int note[]){
 	for(int i = 0; i < 1024; i++){
-		if(fnt[i] == 0){
-			fnt[i] = note;
-			break;
+		if(note[i] == 0) break;
+		int r;
+		bool g = false;
+		while(!g){
+			r = rand()%4;
+			switch(r){
+				case 0:
+					g = true;
+					for(int ii = 0; ii < 1024; ii++){
+						if(dnt[ii] == note[i]) g = false;
+						if(dnt[ii] == 0) break;
+					}
+					break;
+				case 1:
+					g = true;
+					for(int ii = 0; ii < 1024; ii++){
+						if(fnt[ii] == note[i]) g = false;
+						if(fnt[ii] == 0) break;
+					}
+					break;
+				case 2:
+					g = true;
+					for(int ii = 0; ii < 1024; ii++){
+						if(jnt[ii] == note[i]) g = false;
+						if(jnt[ii] == 0) break;
+					}
+					break;
+				case 3:
+					g = true;
+					for(int ii = 0; ii < 1024; ii++){
+						if(knt[ii] == note[i]) g = false;
+						if(knt[ii] == 0) break;
+					}
+					break;
+			}
 		}
-	}
-}
-
-void jadd(int note){
-	for(int i = 0; i < 1024; i++){
-		if(jnt[i] == 0){
-			jnt[i] = note;
-			break;
-		}
-	}
-}
-
-void kadd(int note){
-	for(int i = 0; i < 1024; i++){
-		if(knt[i] == 0){
-			knt[i] = note;
-			break;
+		switch(r){
+			case 0:
+				append(dnt, note[i]);
+				break;
+			case 1:
+				append(fnt, note[i]);
+				break;
+			case 2:
+				append(jnt, note[i]);
+				break;
+			case 3:
+				append(knt, note[i]);
+				break;
 		}
 	}
 }
@@ -91,220 +119,10 @@ int main(int argc, char *argv[]){
 
 	srand(time(NULL));
 
-	for(int i = 0; i < 1024; i++){
-		dnt[i]=0;
-		fnt[i]=0;
-		jnt[i]=0;
-		knt[i]=0;
-	}
-	for(int i = 0; i < 1024; i++){
-		if(dont[i] == 0) break;
-		int r;
-		bool g = false;
-		while(!g){
-			r = rand()%4;
-			switch(r){
-				case 0:
-					g = true;
-					for(int ii = 0; ii < 1024; ii++){
-						if(dnt[ii] == dont[i]) g = false;
-						if(dnt[ii] == 0) break;
-					}
-					break;
-				case 1:
-					g = true;
-					for(int ii = 0; ii < 1024; ii++){
-						if(fnt[ii] == dont[i]) g = false;
-						if(fnt[ii] == 0) break;
-					}
-					break;
-				case 2:
-					g = true;
-					for(int ii = 0; ii < 1024; ii++){
-						if(jnt[ii] == dont[i]) g = false;
-						if(jnt[ii] == 0) break;
-					}
-					break;
-				case 3:
-					g = true;
-					for(int ii = 0; ii < 1024; ii++){
-						if(knt[ii] == dont[i]) g = false;
-						if(knt[ii] == 0) break;
-					}
-					break;
-			}
-		}
-		switch(r){
-			case 0:
-				dadd(dont[i]);
-				break;
-			case 1:
-				fadd(dont[i]);
-				break;
-			case 2:
-				jadd(dont[i]);
-				break;
-			case 3:
-				kadd(dont[i]);
-				break;
-		}
-	}
-	for(int i = 0; i < 1024; i++){
-		if(font[i] == 0) break;
-		int r;
-		bool g = false;
-		while(!g){
-			r = rand()%4;
-			switch(r){
-				case 0:
-					g = true;
-					for(int ii = 0; ii < 1024; ii++){
-						if(dnt[ii] == font[i]) g = false;
-						if(dnt[ii] == 0) break;
-					}
-					break;
-				case 1:
-					g = true;
-					for(int ii = 0; ii < 1024; ii++){
-						if(fnt[ii] == font[i]) g = false;
-						if(fnt[ii] == 0) break;
-					}
-					break;
-				case 2:
-					g = true;
-					for(int ii = 0; ii < 1024; ii++){
-						if(jnt[ii] == font[i]) g = false;
-						if(jnt[ii] == 0) break;
-					}
-					break;
-				case 3:
-					g = true;
-					for(int ii = 0; ii < 1024; ii++){
-						if(knt[ii] == font[i]) g = false;
-						if(knt[ii] == 0) break;
-					}
-					break;
-			}
-		}
-		switch(r){
-			case 0:
-				dadd(font[i]);
-				break;
-			case 1:
-				fadd(font[i]);
-				break;
-			case 2:
-				jadd(font[i]);
-				break;
-			case 3:
-				kadd(font[i]);
-				break;
-		}
-	}
-	for(int i = 0; i < 1024; i++){
-		if(jont[i] == 0) break;
-		int r;
-		bool g = false;
-		while(!g){
-			r = rand()%4;
-			switch(r){
-				case 0:
-					g = true;
-					for(int ii = 0; ii < 1024; ii++){
-						if(dnt[ii] == jont[i]) g = false;
-						if(dnt[ii] == 0) break;
-					}
-					break;
-				case 1:
-					g = true;
-					for(int ii = 0; ii < 1024; ii++){
-						if(fnt[ii] == jont[i]) g = false;
-						if(fnt[ii] == 0) break;
-					}
-					break;
-				case 2:
-					g = true;
-					for(int ii = 0; ii < 1024; ii++){
-						if(jnt[ii] == jont[i]) g = false;
-						if(jnt[ii] == 0) break;
-					}
-					break;
-				case 3:
-					g = true;
-					for(int ii = 0; ii < 1024; ii++){
-						if(knt[ii] == jont[i]) g = false;
-						if(knt[ii] == 0) break;
-					}
-					break;
-			}
-		}
-		switch(r){
-			case 0:
-				dadd(jont[i]);
-				break;
-			case 1:
-				fadd(jont[i]);
-				break;
-			case 2:
-				jadd(jont[i]);
-				break;
-			case 3:
-				kadd(jont[i]);
-				break;
-		}
-	}
-	for(int i = 0; i < 1024; i++){
-		if(kont[i] == 0) break;
-		int r;
-		bool g = false;
-		while(!g){
-			r = rand()%4;
-			switch(r){
-				case 0:
-					g = true;
-					for(int ii = 0; ii < 1024; ii++){
-						if(dnt[ii] == kont[i]) g = false;
-						if(dnt[ii] == 0) break;
-					}
-					break;
-				case 1:
-					g = true;
-					for(int ii = 0; ii < 1024; ii++){
-						if(fnt[ii] == kont[i]) g = false;
-						if(fnt[ii] == 0) break;
-					}
-					break;
-				case 2:
-					g = true;
-					for(int ii = 0; ii < 1024; ii++){
-						if(jnt[ii] == kont[i]) g = false;
-						if(jnt[ii] == 0) break;
-					}
-					break;
-				case 3:
-					g = true;
-					for(int ii = 0; ii < 1024; ii++){
-						if(knt[ii] == kont[i]) g = false;
-						if(knt[ii] == 0) break;
-					}
-					break;
-			}
-		}
-		switch(r){
-			case 0:
-				dadd(kont[i]);
-				break;
-			case 1:
-				fadd(kont[i]);
-				break;
-			case 2:
-				jadd(kont[i]);
-				break;
-			case 3:
-				kadd(kont[i]);
-				break;
-		}
-	}
+	randomize(dont);
+	randomize(font);
+	randomize(jont);
+	randomize(kont);
 
 	FILE *file = fopen(argv[1], "w");
 	if(file == NULL){
