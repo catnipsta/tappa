@@ -91,152 +91,217 @@ int main(int argc, char *argv[]){
 
 	srand(time(NULL));
 
-	bool g;
 	for(int i = 0; i < 1024; i++){
-		int r = rand()%4;
+		dnt[i]=0;
+		fnt[i]=0;
+		jnt[i]=0;
+		knt[i]=0;
+	}
+	for(int i = 0; i < 1024; i++){
+		if(dont[i] == 0) break;
+		int r;
+		bool g = false;
+		while(!g){
+			r = rand()%4;
+			switch(r){
+				case 0:
+					g = true;
+					for(int ii = 0; ii < 1024; ii++){
+						if(dnt[ii] == dont[i]) g = false;
+						if(dnt[ii] == 0) break;
+					}
+					break;
+				case 1:
+					g = true;
+					for(int ii = 0; ii < 1024; ii++){
+						if(fnt[ii] == dont[i]) g = false;
+						if(fnt[ii] == 0) break;
+					}
+					break;
+				case 2:
+					g = true;
+					for(int ii = 0; ii < 1024; ii++){
+						if(jnt[ii] == dont[i]) g = false;
+						if(jnt[ii] == 0) break;
+					}
+					break;
+				case 3:
+					g = true;
+					for(int ii = 0; ii < 1024; ii++){
+						if(knt[ii] == dont[i]) g = false;
+						if(knt[ii] == 0) break;
+					}
+					break;
+			}
+		}
 		switch(r){
 			case 0:
-				g = true;
-				for(int ii = 0; ii < 1024; ii++){
-					if(dnt[ii] == dont[i]) g = false;
-					if(dnt[ii] == 0) break;
-				}
-				if(g) dadd(dont[i]);
+				dadd(dont[i]);
 				break;
 			case 1:
-				g = true;
-				for(int ii = 0; ii < 1024; ii++){
-					if(fnt[ii] == dont[i]) g = false;
-					if(fnt[ii] == 0) break;
-				}
-				if(g) fadd(dont[i]);
+				fadd(dont[i]);
 				break;
 			case 2:
-				g = true;
-				for(int ii = 0; ii < 1024; ii++){
-					if(jnt[ii] == dont[i]) g = false;
-					if(jnt[ii] == 0) break;
-				}
-				if(g) jadd(dont[i]);
+				jadd(dont[i]);
 				break;
 			case 3:
-				g = true;
-				for(int ii = 0; ii < 1024; ii++){
-					if(knt[ii] == dont[i]) g = false;
-					if(knt[ii] == 0) break;
-				}
-				if(g) kadd(dont[i]);
+				kadd(dont[i]);
 				break;
 		}
 	}
 	for(int i = 0; i < 1024; i++){
-		int r = rand()%4;
+		if(font[i] == 0) break;
+		int r;
+		bool g = false;
+		while(!g){
+			r = rand()%4;
+			switch(r){
+				case 0:
+					g = true;
+					for(int ii = 0; ii < 1024; ii++){
+						if(dnt[ii] == font[i]) g = false;
+						if(dnt[ii] == 0) break;
+					}
+					break;
+				case 1:
+					g = true;
+					for(int ii = 0; ii < 1024; ii++){
+						if(fnt[ii] == font[i]) g = false;
+						if(fnt[ii] == 0) break;
+					}
+					break;
+				case 2:
+					g = true;
+					for(int ii = 0; ii < 1024; ii++){
+						if(jnt[ii] == font[i]) g = false;
+						if(jnt[ii] == 0) break;
+					}
+					break;
+				case 3:
+					g = true;
+					for(int ii = 0; ii < 1024; ii++){
+						if(knt[ii] == font[i]) g = false;
+						if(knt[ii] == 0) break;
+					}
+					break;
+			}
+		}
 		switch(r){
 			case 0:
-				g = true;
-				for(int ii = 0; ii < 1024; ii++){
-					if(dnt[ii] == font[i]) g = false;
-					if(dnt[ii] == 0) break;
-				}
-				if(g) dadd(font[i]);
+				dadd(font[i]);
 				break;
 			case 1:
-				g = true;
-				for(int ii = 0; ii < 1024; ii++){
-					if(fnt[ii] == font[i]) g = false;
-					if(fnt[ii] == 0) break;
-				}
-				if(g) fadd(font[i]);
+				fadd(font[i]);
 				break;
 			case 2:
-				g = true;
-				for(int ii = 0; ii < 1024; ii++){
-					if(jnt[ii] == font[i]) g = false;
-					if(jnt[ii] == 0) break;
-				}
-				if(g) jadd(font[i]);
+				jadd(font[i]);
 				break;
 			case 3:
-				g = true;
-				for(int ii = 0; ii < 1024; ii++){
-					if(knt[ii] == font[i]) g = false;
-					if(knt[ii] == 0) break;
-				}
-				if(g) kadd(font[i]);
+				kadd(font[i]);
 				break;
 		}
 	}
 	for(int i = 0; i < 1024; i++){
-		int r = rand()%4;
+		if(jont[i] == 0) break;
+		int r;
+		bool g = false;
+		while(!g){
+			r = rand()%4;
+			switch(r){
+				case 0:
+					g = true;
+					for(int ii = 0; ii < 1024; ii++){
+						if(dnt[ii] == jont[i]) g = false;
+						if(dnt[ii] == 0) break;
+					}
+					break;
+				case 1:
+					g = true;
+					for(int ii = 0; ii < 1024; ii++){
+						if(fnt[ii] == jont[i]) g = false;
+						if(fnt[ii] == 0) break;
+					}
+					break;
+				case 2:
+					g = true;
+					for(int ii = 0; ii < 1024; ii++){
+						if(jnt[ii] == jont[i]) g = false;
+						if(jnt[ii] == 0) break;
+					}
+					break;
+				case 3:
+					g = true;
+					for(int ii = 0; ii < 1024; ii++){
+						if(knt[ii] == jont[i]) g = false;
+						if(knt[ii] == 0) break;
+					}
+					break;
+			}
+		}
 		switch(r){
 			case 0:
-				g = true;
-				for(int ii = 0; ii < 1024; ii++){
-					if(dnt[ii] == jont[i]) g = false;
-					if(dnt[ii] == 0) break;
-				}
-				if(g) dadd(jont[i]);
+				dadd(jont[i]);
 				break;
 			case 1:
-				g = true;
-				for(int ii = 0; ii < 1024; ii++){
-					if(fnt[ii] == jont[i]) g = false;
-					if(fnt[ii] == 0) break;
-				}
-				if(g) fadd(jont[i]);
+				fadd(jont[i]);
 				break;
 			case 2:
-				g = true;
-				for(int ii = 0; ii < 1024; ii++){
-					if(jnt[ii] == jont[i]) g = false;
-					if(jnt[ii] == 0) break;
-				}
-				if(g) jadd(jont[i]);
+				jadd(jont[i]);
 				break;
 			case 3:
-				g = true;
-				for(int ii = 0; ii < 1024; ii++){
-					if(knt[ii] == jont[i]) g = false;
-					if(knt[ii] == 0) break;
-				}
-				if(g) kadd(jont[i]);
+				kadd(jont[i]);
 				break;
 		}
 	}
 	for(int i = 0; i < 1024; i++){
-		int r = rand()%4;
+		if(kont[i] == 0) break;
+		int r;
+		bool g = false;
+		while(!g){
+			r = rand()%4;
+			switch(r){
+				case 0:
+					g = true;
+					for(int ii = 0; ii < 1024; ii++){
+						if(dnt[ii] == kont[i]) g = false;
+						if(dnt[ii] == 0) break;
+					}
+					break;
+				case 1:
+					g = true;
+					for(int ii = 0; ii < 1024; ii++){
+						if(fnt[ii] == kont[i]) g = false;
+						if(fnt[ii] == 0) break;
+					}
+					break;
+				case 2:
+					g = true;
+					for(int ii = 0; ii < 1024; ii++){
+						if(jnt[ii] == kont[i]) g = false;
+						if(jnt[ii] == 0) break;
+					}
+					break;
+				case 3:
+					g = true;
+					for(int ii = 0; ii < 1024; ii++){
+						if(knt[ii] == kont[i]) g = false;
+						if(knt[ii] == 0) break;
+					}
+					break;
+			}
+		}
 		switch(r){
 			case 0:
-				g = true;
-				for(int ii = 0; ii < 1024; ii++){
-					if(dnt[ii] == kont[i]) g = false;
-					if(dnt[ii] == 0) break;
-				}
-				if(g) dadd(kont[i]);
+				dadd(kont[i]);
 				break;
 			case 1:
-				g = true;
-				for(int ii = 0; ii < 1024; ii++){
-					if(fnt[ii] == kont[i]) g = false;
-					if(fnt[ii] == 0) break;
-				}
-				if(g) fadd(kont[i]);
+				fadd(kont[i]);
 				break;
 			case 2:
-				g = true;
-				for(int ii = 0; ii < 1024; ii++){
-					if(jnt[ii] == kont[i]) g = false;
-					if(jnt[ii] == 0) break;
-				}
-				if(g) jadd(kont[i]);
+				jadd(kont[i]);
 				break;
 			case 3:
-				g = true;
-				for(int ii = 0; ii < 1024; ii++){
-					if(knt[ii] == kont[i]) g = false;
-					if(knt[ii] == 0) break;
-				}
-				if(g) kadd(kont[i]);
+				kadd(kont[i]);
 				break;
 		}
 	}
