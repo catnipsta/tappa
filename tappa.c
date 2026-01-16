@@ -29,19 +29,43 @@ void draw(void){
 	mvprintw(1,0,"hits:     %d",hits);
 	mvprintw(2,0,"misses:   %d",misses);
 	mvprintw(3,0,"accuracy: %f\%\n",(float)hits/(hits+misses)*100);
-	mvprintw(my-1,mx/2-5,"d  f  j  k");
-	mvprintw(my-2,mx/2-5,"_  _  _  _");
+
 	for(int i = 0; i < 1024; i++){
-		if(dnt[i]-t < my-1 && dnt[i]-t >= 1) mvprintw(my-(dnt[i]-t)-2,mx/2-5,"o");
-		if(fnt[i]-t < my-1 && fnt[i]-t >= 1) mvprintw(my-(fnt[i]-t)-2,mx/2-2,"o");
-		if(jnt[i]-t < my-1 && jnt[i]-t >= 1) mvprintw(my-(jnt[i]-t)-2,mx/2+1,"o");
-		if(knt[i]-t < my-1 && knt[i]-t >= 1) mvprintw(my-(knt[i]-t)-2,mx/2+4,"o");
+		attron(COLOR_PAIR(1));
+		if(dnt[i]-t < my-1 && dnt[i]-t >= 1) mvprintw(my-(dnt[i]-t)-2,mx/2-5,"@");
+		attroff(COLOR_PAIR(1));
+		attron(COLOR_PAIR(2));
+		if(fnt[i]-t < my-1 && fnt[i]-t >= 1) mvprintw(my-(fnt[i]-t)-2,mx/2-2,"@");
+		attroff(COLOR_PAIR(2));
+		attron(COLOR_PAIR(3));
+		if(jnt[i]-t < my-1 && jnt[i]-t >= 1) mvprintw(my-(jnt[i]-t)-2,mx/2+1,"@");
+		attroff(COLOR_PAIR(3));
+		attron(COLOR_PAIR(4));
+		if(knt[i]-t < my-1 && knt[i]-t >= 1) mvprintw(my-(knt[i]-t)-2,mx/2+4,"@");
+		attroff(COLOR_PAIR(4));
 		if(dnt[i] == 0 && fnt[i] == 0 && jnt[i] == 0 && knt[i] == 0) break;
 	}
+
+	attron(COLOR_PAIR(1));
+	mvprintw(my-1,mx/2-5,"d");
+	mvprintw(my-2,mx/2-5,"_");
 	if(d == true) mvprintw(my-2,mx/2-5,"*");
+	attroff(COLOR_PAIR(1));
+	attron(COLOR_PAIR(2));
+	mvprintw(my-1,mx/2-2,"f");
+	mvprintw(my-2,mx/2-2,"_");
 	if(f == true) mvprintw(my-2,mx/2-2,"*");
+	attroff(COLOR_PAIR(2));
+	attron(COLOR_PAIR(3));
+	mvprintw(my-1,mx/2+1,"j");
+	mvprintw(my-2,mx/2+1,"_");
 	if(j == true) mvprintw(my-2,mx/2+1,"*");
+	attroff(COLOR_PAIR(3));
+	attron(COLOR_PAIR(4));
+	mvprintw(my-1,mx/2+4,"k");
+	mvprintw(my-2,mx/2+4,"_");
 	if(k == true) mvprintw(my-2,mx/2+4,"*");
+	attroff(COLOR_PAIR(4));
 	int bl = (float)my/100*bar;
 	for(int y = 0; y < bl; y++){
 		mvprintw((my-y)-1,mx/2-8,"|");
@@ -59,7 +83,7 @@ void togglepause(){
 		paused=true;
 		ma_device_stop(&device);
 	}
-	mvprintw(0,0,"time: %d/%d (paused)",t,length);
+	mvprintw(0,0,"time:     %d/%d (paused)",t,length);
         refresh();
 }
 
@@ -82,6 +106,7 @@ void input(void){
 			if(paused) togglepause();
 			break;
 		case 'r':
+			if(paused) togglepause();
 			bar = 0;
 			break;
 		case ' ':
@@ -232,6 +257,11 @@ int main(int argc, char *argv[]){
 	noecho();
 	nodelay(stdscr,true);
 	curs_set(0);
+	start_color();
+	init_pair(1, COLOR_MAGENTA, COLOR_BLACK);
+	init_pair(2, COLOR_CYAN, COLOR_BLACK);
+	init_pair(3, COLOR_GREEN, COLOR_BLACK);
+	init_pair(4, COLOR_YELLOW, COLOR_BLACK);
 
 	while(t < length && !quit){
 		if(load(argv[1]) != 0){
@@ -257,7 +287,7 @@ int main(int argc, char *argv[]){
 			f=false;
 			j=false;
 			k=false;
-			while((float)frame/frames < (float)t/length){
+			while((float)frame/frames < (float)t/length && t < length){
 				input();
                 		ma_decoder_get_cursor_in_pcm_frames(&decoder, &frame);
 			}

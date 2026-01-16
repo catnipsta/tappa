@@ -24,12 +24,28 @@ void draw(void){
 		}
 	}
 	mvprintw(0,0,"time: %d/%d",t,length);
-	mvprintw(my-1,mx/2-5,"d  f  j  k");
-	mvprintw(my-2,mx/2-5,"_  _  _  _");
+
+	attron(COLOR_PAIR(1));
+	mvprintw(my-1,mx/2-5,"d");
+	mvprintw(my-2,mx/2-5,"_");
 	if(d == true) mvprintw(my-2,mx/2-5,"*");
+	attroff(COLOR_PAIR(1));
+	attron(COLOR_PAIR(2));
+	mvprintw(my-1,mx/2-2,"f");
+	mvprintw(my-2,mx/2-2,"_");
 	if(f == true) mvprintw(my-2,mx/2-2,"*");
+	attroff(COLOR_PAIR(2));
+	attron(COLOR_PAIR(3));
+	mvprintw(my-1,mx/2+1,"j");
+	mvprintw(my-2,mx/2+1,"_");
 	if(j == true) mvprintw(my-2,mx/2+1,"*");
+	attroff(COLOR_PAIR(3));
+	attron(COLOR_PAIR(4));
+	mvprintw(my-1,mx/2+4,"k");
+	mvprintw(my-2,mx/2+4,"_");
 	if(k == true) mvprintw(my-2,mx/2+4,"*");
+	attroff(COLOR_PAIR(4));
+
 	refresh();
 }
 
@@ -148,7 +164,7 @@ int main(int argc, char *argv[]){
 		return 1;
 	}
 	speed = atoi(argv[2]);
-	FILE *file= fopen(argv[1], "w");
+	FILE *file = fopen(argv[1], "w");
 	if(file == NULL){
 		printf("Error opening '%s'.\n",argv[1]);
 		return 2;
@@ -186,6 +202,11 @@ int main(int argc, char *argv[]){
 	noecho();
 	nodelay(stdscr,true);
 	curs_set(0);
+	start_color();
+	init_pair(1, COLOR_MAGENTA, COLOR_BLACK);
+	init_pair(2, COLOR_CYAN, COLOR_BLACK);
+	init_pair(3, COLOR_GREEN, COLOR_BLACK);
+	init_pair(4, COLOR_YELLOW, COLOR_BLACK);
 
 	ma_decoder_seek_to_pcm_frame(&decoder, 0);
 	while(t < length && !quit){
