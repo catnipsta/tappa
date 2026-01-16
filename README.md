@@ -15,9 +15,14 @@ tappa level.tap
 
 ## Create a level
 ```
-taprec (levelfilename.tap) (level speed) (path/to/song.{mp3,wav,ogg,flac})
+taprec level.tap (level speed) path/to/song.{mp3,wav,ogg,flac}
 ```
-(level speeds are recommended to be somewhere from 10 to 64)
+(level speeds are recommended to be somewhere from 15 to 64)
+
+## Randomize a level
+```
+taprand level.tap
+```
 
 ## Extra features
 Q to quit.
