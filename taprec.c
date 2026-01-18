@@ -91,15 +91,19 @@ void seek(){
 
 void input(void){
 	switch(getch()){
+		case 'z':
 		case 'd':
 			d = true;
 			break;
+		case 'x':
 		case 'f':
 			f = true;
 			break;
+		case ',':
 		case 'j':
 			j = true;
 			break;
+		case '.':
 		case 'k':
 			k = true;
 			break;
