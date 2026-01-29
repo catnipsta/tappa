@@ -5,34 +5,21 @@
 #include <time.h>
 
 int speed;
-int dnt[1024],fnt[1024],jnt[1024],knt[1024],dont[1024],font[1024],jont[1024],kont[1024];
+int dnt[1024],fnt[1024],jnt[1024],knt[1024],ont[4096];
 char song[64];
 
 int load(char *lvlname){
 	FILE *lvl = fopen(lvlname, "r");
 	if(lvl == NULL) return 1;
 	char line[4096];
+	int i = 0;
 	for(int l=0; l < 4; l++){
 		fgets(line,4096,lvl);
 		char *str = strtok(line,",");
-		int i = 0;
 		while(str != NULL){
-			switch(l){
-				case 0:
-					dont[i] = atoi(str);
-					break;
-				case 1:
-					font[i] = atoi(str);
-					break;
-				case 2:
-					jont[i] = atoi(str);
-					break;
-				case 3:
-					kont[i] = atoi(str);
-					break;
-			}
+			ont[i] = atoi(str);
 			str = strtok(NULL,",");
-			i++;
+			if(ont[i] != 0) i++;
 		}
 	}
 	fgets(line,4096,lvl);
@@ -52,9 +39,10 @@ void append(int arr[], int note){
 	}
 }
 
-void randomize(int note[]){
-	for(int i = 0; i < 1024; i++){
-		if(note[i] == 0) break;
+void randomize(){
+	int or = 4;
+	for(int i = 0; i < 4096; i++){
+		if(ont[i] == 0) break;
 		int r;
 		bool g = false;
 		while(!g){
@@ -63,47 +51,66 @@ void randomize(int note[]){
 				case 0:
 					g = true;
 					for(int ii = 0; ii < 1024; ii++){
-						if(dnt[ii] == note[i]) g = false;
+						if(dnt[ii] == ont[i]) g = false;
 						if(dnt[ii] == 0) break;
 					}
 					break;
 				case 1:
 					g = true;
 					for(int ii = 0; ii < 1024; ii++){
-						if(fnt[ii] == note[i]) g = false;
+						if(fnt[ii] == ont[i]) g = false;
 						if(fnt[ii] == 0) break;
 					}
 					break;
 				case 2:
 					g = true;
 					for(int ii = 0; ii < 1024; ii++){
-						if(jnt[ii] == note[i]) g = false;
+						if(jnt[ii] == ont[i]) g = false;
 						if(jnt[ii] == 0) break;
 					}
 					break;
 				case 3:
 					g = true;
 					for(int ii = 0; ii < 1024; ii++){
-						if(knt[ii] == note[i]) g = false;
+						if(knt[ii] == ont[i]) g = false;
 						if(knt[ii] == 0) break;
 					}
 					break;
 			}
+			if(or == r && rand()%10 > 0) g = false;
 		}
 		switch(r){
 			case 0:
-				append(dnt, note[i]);
+				append(dnt, ont[i]);
 				break;
 			case 1:
-				append(fnt, note[i]);
+				append(fnt, ont[i]);
 				break;
 			case 2:
-				append(jnt, note[i]);
+				append(jnt, ont[i]);
 				break;
 			case 3:
-				append(knt, note[i]);
+				append(knt, ont[i]);
 				break;
 		}
+		or = r;
+	}
+}
+
+void order(){
+	int min, mi;
+	for(int i = 0; i < 4096; i++){
+		if(ont[i] == 0) break;
+		min = 999999999;
+		for(int ii = i; ii < 4096; ii++){
+			if(min > ont[ii] && ont[ii] != 0){
+				min = ont[ii];
+				mi = ii;
+			}
+		}
+		int t = ont[i];
+		ont[i] = ont[mi];
+		ont[mi] = t;
 	}
 }
 
@@ -119,10 +126,8 @@ int main(int argc, char *argv[]){
 
 	srand(time(NULL));
 
-	randomize(dont);
-	randomize(font);
-	randomize(jont);
-	randomize(kont);
+	order();
+	randomize();
 
 	FILE *file = fopen(argv[1], "w");
 	if(file == NULL){
