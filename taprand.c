@@ -77,7 +77,7 @@ void randomize(){
 					}
 					break;
 			}
-			if(or == r && rand()%10 > 0) g = false;
+			if(or == r && rand()%7 > 0) g = false;
 		}
 		switch(r){
 			case 0:
